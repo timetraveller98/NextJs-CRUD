@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+  background-color: rgba(18, 1, 1, 0.117);
+}
 .navbar li{
 list-style: none;
 display: inline-block;
