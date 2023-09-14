@@ -1,8 +1,11 @@
 'use client'
 import { signupSchema } from '@/schemas'
 import { useFormik } from 'formik'
+import { useRouter } from 'next/navigation'
 
 const AddUser = () => {
+
+    const router = useRouter();
 
     //  Form Handling By Formik
     const initialValues = {
@@ -18,7 +21,11 @@ const AddUser = () => {
                 method: "POST",
                 body: JSON.stringify(values),
             })
-            response = await response.json();}
+            response = await response.json();
+            alert('Product Added')
+            router.push('/')
+        }
+            
         
     })
 

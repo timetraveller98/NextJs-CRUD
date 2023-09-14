@@ -5,4 +5,4 @@ const productSchema = new mongoose.Schema({
     contact:Number
 })
 
-export const productModel = mongoose.model('products', productSchema)
+export const productModel = mongoose.models.products || mongoose.model('products', productSchema) 

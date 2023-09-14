@@ -24,7 +24,7 @@ const Home = () =>{
   useEffect(() => {
     axios.get("http://localhost:3000/api/product").then((res: any) => setProduct(res.data.data)).catch((err: any) => console.log(err))
 
-  },[])
+  },[product])
 
  
   return (

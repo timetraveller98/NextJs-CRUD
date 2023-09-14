@@ -47,16 +47,13 @@ let singleData =await axios.get(`http://localhost:3000/api/product/${params.upda
     // Update User Data
 
     const handleUpdate = async()=>{
-        alert('Data Updated Succesfully')
         router.push('/');
         const pushData = await fetch(`http://localhost:3000/api/product/${params.updateuser}`,{
             method:'Put',
             body: JSON.stringify({name,email,contact}),
             headers:{"Content-Type": "application/json"}})
-         let result = await pushData.json();
-         if(result.data){
+            await pushData.json();
             alert("Updated")
-         }
         }
 
     return( <>
