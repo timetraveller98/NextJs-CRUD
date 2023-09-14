@@ -16,18 +16,20 @@ const router = useRouter();
 
     
 // Call Single API Data
+
 const params = useParams();
 useEffect(()=>{
    
-  pullData();
+pullData();
  
 },[])
 const pullData = async()=>{
-let singleData =await axios.get(`http://localhost:5000/singleuser/${params.updateuser}`).then((res)=>(res.data)).
+let singleData =await axios.get(`http://localhost:3000/api/product/${params.updateuser}`).then((res)=>(res.data.data)).
     catch((err)=>console.log(err,+'Error Found Fetch API'))
     SetName(singleData.name)
     SetEmail(singleData.email)
     SetContact(singleData.contact)
+
 }
 
     // Data
@@ -47,13 +49,14 @@ let singleData =await axios.get(`http://localhost:5000/singleuser/${params.updat
     const handleUpdate = async()=>{
         alert('Data Updated Succesfully')
         router.push('/');
-        const pushData = await fetch(`http://localhost:5000/updateuser/${params.updateuser}`,{
+        const pushData = await fetch(`http://localhost:3000/api/product/${params.updateuser}`,{
             method:'Put',
-            mode: "cors",
-            cache: "no-cache",
             body: JSON.stringify({name,email,contact}),
             headers:{"Content-Type": "application/json"}})
-         return pushData.json();
+         let result = await pushData.json();
+         if(result.data){
+            alert("Updated")
+         }
         }
 
     return( <>

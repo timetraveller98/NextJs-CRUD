@@ -3,27 +3,28 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = () =>{
 
-  const [student, setStudent] = useState<any[]>([])
-  const route = useRouter();
+  const [product, setProduct] = useState<any[]>([])
+  const router = useRouter();
 
    //Call Delete API
 
    const deleteUser = async (id: any) => {
-    let user = await fetch(`http://localhost:5000/${id}`, {
-      method: 'Delete'
+    let user = await fetch(`http://localhost:3000/api/product/${id}`, {
+      method: 'Delete',
+      cache:'no-cache',
     })
     user = await user.json();
-    alert("User Deleted")
-    
+      alert("User Deleted") 
+      router.push('/')
   }
 
   //Call API
   useEffect(() => {
-    axios.get("http://localhost:5000").then((res: any) => setStudent(res.data)).catch((err: any) => console.log(err))
+    axios.get("http://localhost:3000/api/product").then((res: any) => setProduct(res.data.data)).catch((err: any) => console.log(err))
 
-  }, [])
+  },[])
 
  
   return (
@@ -44,14 +45,14 @@ const Home = () => {
         <tbody>
 
        {
-            student.map((item: any, index: any) => (
+            product.map((item: any, index: any) => (
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.contact}</td>
                 <td>{item.email}</td>
-                <td><button onClick={() => {deleteUser(item._id)}} style={{ padding: '7px', backgroundColor: 'red', color: 'white', cursor: 'pointer' }}>Delete</button></td>
-                <td><button onClick={() => route.push(`updateuser/${item._id}`)} style={{ padding: '7px', backgroundColor: 'green', color: 'white', cursor: 'pointer' }} >Update</button></td>
+                <td><button onClick={()=>{deleteUser(item._id)}}  style={{ padding: '7px', backgroundColor: 'red', color: 'white', cursor: 'pointer' }}>Delete</button></td>
+                <td><button onClick={()=>router.push(`/updateuser/${item._id}`)} style={{ padding: '7px', backgroundColor: 'green', color: 'white', cursor: 'pointer' }} >Update</button></td>
               </tr>
             ))
           }
