@@ -11,16 +11,17 @@ const Home = () =>{
    //Call Delete API
 
    const deleteUser = async (id: any) => {
+    if (confirm("Do you want to Delete ?")==true) {
     let user = await fetch(`http://localhost:3000/api/product/${id}`, {
       method: 'Delete',
       cache:'no-cache',
     })
     user = await user.json();
-      alert("User Deleted") 
+      alert("User Deleted !") 
       router.push('/')
-  }
+  }null}
 
-  //Call API
+  //Call GET API
   useEffect(() => {
     axios.get("http://localhost:3000/api/product").then((res: any) => setProduct(res.data.data)).catch((err: any) => console.log(err))
 
