@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
-export const signupSchema = yup.object({
+export const productSchema = yup.object({
 name:yup.string().min(3,'Too Short').max(25, 'Too Long').required("required"),
-email:yup.string().email('Invalid Email').required("required"),
-contact:yup.number().required("required")
+weight:yup.number().required("required"),
+price:yup.number().required("required")
 })
 
